@@ -29,6 +29,26 @@ def decryptage(token):
         return f"Valeur décryptée : {decrypted}"
     except Exception as e:
         return f"Erreur lors du déchiffrement : {str(e)}"
+
+@app.route('/encrypt_personal/<key>/<message>')
+def encrypt_personal(key, message):
+    try:
+        f = Fernet(key.encode())
+        encrypted = f.encrypt(message.encode())
+        return encrypted.decode()
+    except Exception as e:
+        return f"Erreur : {str(e)}"
+
+@app.route('/decrypt_personal/<key>/<token>')
+def decrypt_personal(key, token):
+    try:
+        f = Fernet(key.encode())
+        decrypted = f.decrypt(token.encode())
+        return decrypted.decode()
+    except Exception as e:
+        return f"Erreur : {str(e)}"
+
+
       
 if __name__ == "__main__":
   app.run(debug=True)
