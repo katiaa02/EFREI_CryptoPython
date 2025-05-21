@@ -19,7 +19,8 @@ def encryptage(valeur):
     valeur_bytes = valeur.encode()  # Conversion str -> bytes
     token = f.encrypt(valeur_bytes)  # Encrypt la valeur
     return f"Valeur encryptée : {token.decode()}"  # Retourne le token en str
-@app.route('/decrypt/<string:valeur>')  
+  
+@app.route('/decrypt/<string:token>')
 def decryptage(token):
     try:
         token_decoded = urllib.parse.unquote_plus(token)
